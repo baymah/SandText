@@ -1,0 +1,115 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Edekee",
+        "contact": {},
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://api.edekee.io:80/v1",
+            "variables": {}
+        },
+        {
+            "url": "http://localhost:82/v1",
+            "variables": {}
+        }
+    ],
+    "paths": {
+        "/users/register": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Signup",
+                "operationId": "Signup",
+                "parameters": [],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignupRequest"
+                            },
+                            "example": {
+                                "firstname":"Segun",
+                                "lastname":"Oladipupo",
+                                "email": "edekee@gmail.com",
+                                "password": "ifyoucanclickityoucanbuyit"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SignupRequest"
+                                },
+                                "example": {
+                                    "message": "User Registered successfully",
+                                    "data": {
+                                        "user": {
+                                            "email": "edekee@gmail.com",
+                                            "otp":123456
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "SignupRequest": {
+                "title": "SignupRequest",
+                "required": ["firstname","lastname","email", "password"],
+                "type": "object",
+                "properties": {
+                    "firstname":{
+                        "type": "string"
+                    },
+                    "lastname":{
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "firstname":"Segun",
+                    "lastname":"Oladipupo",
+                    "email": "edekee@gmail.com",
+                    "password": "ifyoucanclickityoucanbuyit"
+                },
+                "error":{"name":"Err"}
+
+            }
+        },
+        "securitySchemes": {
+            "httpBearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "httpBearer": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Users"
+        }
+    ]
+}
